@@ -1,6 +1,37 @@
-# KGView
-知识图谱可视化javascript库，基于d3.js，面向网页前端知识图谱展示
-# 文档
-https://molaspace.xyz/molablog/page/72
-# Demo
-https://molaspace.xyz/KGView/
+# D3编程实现多页面之间的交互
+# 数据是基于近半个月的豆瓣同城音乐活动，含有杭州地图等交互查询
+
+
+# 1.视频展示
+
+![mp4_download](https://github.com/yuanbozhou/D3-Interaction/blob/master/%E7%A8%8B%E5%BA%8F%E6%BC%94%E7%A4%BA%E8%A7%86%E9%A2%91.mp4)
+# 2.页面展示
+    2.1 数据的来源，以及数据保存的位置
+
+![image](界面展示1.png)
+
+    2.2 全部的代码页面展示
+
+![image](界面展示2.png)
+
+    2.3 index界面，最基本的页面，访问此文件，进而点击，跳转不同的页面
+
+![image](界面展示3.png)
+
+    2.4 d3绘制包含杭州地图（杭州地图来源阿里云网站）
+
+![image](界面展示4.png)
+
+# 3.总文件test里不同类型文件的介绍
+# css
+页面布局文件
+# js
+d3需要引用一些js文件
+# py
+爬虫豆瓣同城音乐的活动数据
+# csv（已爬虫好）
+保存下来的的豆瓣同城音乐活动数据
+# html
+基本页面
+# jpg
+用词云，把豆瓣电影数据保存下来的图片
