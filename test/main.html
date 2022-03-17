@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+    <meta charset="utf-8" />
+    <title>同城</title>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script type="text/javascript" src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <link rel="stylesheet" href="css/materialize.min.css">
+   
+   
+
+    <style>
+        body {
+            background: linear-gradient(90deg, #ffffff, #d2e0f8)
+        }
+
+        .container {
+            width: 100%;
+            height: 35rem;
+
+            float: right;
+            display: flex;
+        }
+
+        .btn_container {
+            width: 100%;
+            height: 10rem;
+            text-align: center;
+        }
+
+        .btn_container:after {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        #toast-container {
+            top: 80%;
+            right: 45%;
+        }
+
+        .bubbles{
+            stroke-width:2px;
+            stroke:white;
+        }
+        .bubbles:hover{
+            stroke:green;
+        }
+    </style>
+</head>
+<script>   
+    function show()
+                {
+                    console.log("5的位置");
+                    
+                    return "./wordCloud.jpg"
+                   
+                }
+</script>
+
+
+    <nav style="background:#007497e0">
+        <div class="nav-wrapper">
+            <a href="main.html" class="brand-logo" style="margin-left: 1rem;font-size: 1.2rem; ">同城数据可视化</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="https://www.douban.com/location/hangzhou/events/future-music">豆瓣同城页面</a></li>
+               
+            </ul>
+        </div>
+    </nav>
+    <!-- <div id="container" class="container"></div> -->
+
+    <div class="row" style="
+    margin-top: 10px;
+    display: flex;">
+
+        <ul class="collapsible" data-collapsible="accordion" style="
+        margin-left: 4rem;width: 26rem">
+            <li class="active">
+                <div class="collapsible-header">样本数据</div>
+                <div class="collapsible-body" style="display: block;">
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea id="ta" class="materialize-textarea"
+                                        style="border-bottom: 0px;width: 24rem; height: 10em"></textarea>
+                                    <label for="textarea1" id="t1">
+                                        <!-- id,avgPrice_music,avgPrice_drama,<br>avgPrice_exhibition,avgPrice_sports<br>
+                                        [1,298.5,699.0,50,10,]<br>
+                                        [2,762.5,580.0,191.0,10,]<br>
+                                        [3,762.5,580.0,191.0,10,]<br>
+                                        [4,512.5,282.0,10.0,0,]<br>
+                                        [5,332.5,2427.0,0,20.0,] -->
+                                        Number,Value<br>
+                                        [1,13]<br>
+                                        [2,3]<br>
+                                        [3,13]<br>
+                                        [4,13]<br>
+                                        [5,18]<br>
+                                        [6,4]<br>
+                                        [7,1]<br>
+                                        [8,3]<br>
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </li>
+
+          
+           </li>
+            <li class="btn_container"  onclick="show()">
+                <a class="waves-effect waves-light btn-large">生成wordCloud</a>
+                <!-- <img src="x" onerror="javscript:this.scr=javascript:show()" width="350px" alt="图片未加载" /> -->
+            </li>
+            <img src="wordcloud.jpg" width="380px" alt="图片未加载" />
+            <!-- <script>
+            function c1(){
+                <img src="wordcloud.jpg" width="350px" alt="图片未加载" />
+            }
+           </script> -->
+        </ul>
+ 
+
+
+
+        <div class="col s12 m7" style="
+            float: right;
+            margin-right: 4rem;
+        ">
+
+            <div class="card">
+                <script>
+                var width=1000
+                var height=500
+
+                console.log(width,height);
+        
+
+              
+                
+                </script>
+     
+     
+     
+                <div id="container">
+                   
+                    
+               
+               
+                    <svg height="300" width="400" id="container1" xlink:href= "index1.html"> 
+                        
+                         <a xlink:href="index1.html">
+                            <rect x="0" y="0" width="1000" height="1000" rx="0" ry="10"
+                                  style="fill:white"/>
+                            <text x="170" y="30" font-size="12" fill="black"></text>
+                        </a>
+                   </svg> 
+                   
+
+                    <svg height="300" width="400" id="container2">
+                        <a xlink:href="index3.html">
+                            <rect x="30" y="10" width="70" height="30" rx="10" ry="10"
+                                  style="fill:lightgrey"/>
+                            <text x="40" y="30" font-size="12" fill="black">Click here</text>
+                        </a>
+                        <a xlink:href="index4.html">
+                            <rect x="180" y="10" width="70" height="30" rx="10" ry="10"
+                                  style="fill:lightgrey"/>
+                            <text x="190" y="30" font-size="12" fill="black">Click here</text>
+                        </a>
+
+                        <!-- <a xlink:href="index6.html">
+                            <rect x="230" y="10" width="70" height="30" rx="10" ry="10"
+                                  style="fill:lightgrey"/>
+                            <text x="240" y="30" font-size="12" fill="black">Click here</text>
+                        </a> -->
+
+                        <a xlink:href="index8 copy.html">
+                            <rect x="330" y="10" width="70" height="30" rx="10" ry="10"
+                                  style="fill:lightgrey"/>
+                            <text x="340" y="30" font-size="12" fill="black">Click here</text>
+                        </a>
+                    </svg> 
+
+
+                    <svg height="300" width="400" id="container4">
+                        <a xlink:href="index14.html">
+                            <rect x="50" y="0" width="400" height="1000" rx="0" ry="10"
+                                  style="fill:white"/>
+                            <text x="170" y="30" font-size="12" fill="black"></text>
+                        </a>
+                    </svg> 
+
+
+                    <svg height="300" width="400" id="container3">
+                        <a xlink:href="index2.html">
+                            <rect x="0" y="0" width="1200" height="1000" rx="0" ry="10"
+                                  style="fill:white"/>
+                            <text x="170" y="30" font-size="12" fill="black"></text>
+                        </a>
+                    </svg> 
+
+
+                   
+                    <!-- <svg height="200" width="500" id="container5"></svg>  -->
+                  
+
+                    <span class="card-title" style="color: #868181;">Graph</span>
+                </div>
+
+                <div class="card-content" style="background: aliceblue;">
+                    <p>基于d3.js构建</p>
+               </div>
+
+              
+            </div>
+        </div>
+    </div>
+    
+<body>
+
+        <script>
+            var width1=400
+            var height1=500
+
+             //container1 
+                    
+            d3.csv("container1.csv", function(data) {
+            console.log(data)   
+            console.log(width1)  
+                        
+            data.sort(function(b,a){
+                    return a.Value-b.Value;
+                });
+
+            console.log(1111111,data)   
+            console.log(width1)  
+            console.log("测试11")  
+           
+            var margin = {top: height1*0.1, right:  width1*0.01, bottom:  height1*0.5, left: width1*0.2};
+            
+            // var margin = {top: 20, right: 30, bottom: 40, left: 90},
+            console.log(margin.left)
+            console.log(margin.right)
+            
+
+
+            const innerWidth = width1 - margin.left - margin.right;
+            const innerHeight = height1 - margin.top - margin.bottom;
+            console.log("000",margin.right)
+            
+            const g1 =d3.selectAll("#container1") 
+                .append('g')
+                .attr('id', 'maingroup1')
+                .attr("width",innerWidth)
+                .attr("height",innerHeight)
+                // .attr('transform', `translate(${10}, ${-105})`);
+
+                .attr('transform', `translate(${margin.left}, ${margin.top})`);
+            console.log("innerWidth22",innerWidth)
+            console.log("innerHeight22",innerHeight)
+  
+            var x = d3.scaleLinear()
+                            .domain([0, 20]) //比例尺值域
+                            .range([0, innerWidth]); //输入的值
+
+                    g1.append("g")
+                            .attr("transform", "translate(0," + innerHeight + ")")
+                            .call(d3.axisBottom(x))
+                            .selectAll("text")
+                            .attr("transform", "translate(-10,0)rotate(-45)")
+                            .style("text-anchor", "end");
+
+                        // Y axis
+             var y = d3.scaleBand()
+                            .range([ 0, innerHeight ])
+                            .domain(data.map(function(d) { return d.Country; }))
+                            .padding(.1);
+                    g1.append("g")
+                            .call(d3.axisLeft(y))
+                            // .attr("transform", "translate(50,0)")
+                        
+
+                        //Bars
+                    g1.selectAll("myRect")
+                            
+                            .data(data)
+                            .enter()
+                            .append("rect")
+                            .attr("x", x(0.05) )
+                            .attr("y", function(d) { return y(d.Country); })
+                            .transition()
+                            .duration(4000)
+                            .attr("width", function(d) { return x(d.Value); })
+                            .attr("height", y.bandwidth() )
+                            .attr("fill", "#69b3a2")
+
+
+            
+                    // g1.selectAll(".text")
+                    //         .data(data)
+                    //         .enter()
+                    //         .append("texts")
+                    //         .attr('class','text')
+                    //         .transition()
+                    //         // .duration(4000)
+                    //         .attr("x", x(function(d) { return x(d.Value); }) )
+                    //         .attr("y", function(d) { return y(d.Country); })
+                    //         // .attr("width", function(d) { return x(d.Value)+y.bandwidth()/2; })
+                    //         // .attr("height", y.bandwidth() )
+                    //         .attr("font-size", "0.56em")
+            
+        })
+             
+
+
+
+            //container2 
+            d3.csv("connectedscatter.csv", function(data) {
+            console.log(1111111,data)   
+            console.log(width1)  
+            console.log("测试11")  
+           
+            var margin = {top: height1*0.1, right: width1*0.02, bottom:  height1*0.5, left: width1*0.20};
+            
+            // var margin = {top: 20, right: 30, bottom: 40, left: 90},
+            console.log(margin.left)
+            console.log(margin.right)
+            
+
+
+            const innerWidth = width1 - margin.left - margin.right;
+            const innerHeight = height1 - margin.top - margin.bottom;
+            console.log("000",margin.right)
+            
+            const g2 =d3.selectAll("#container2") 
+                .append('g')
+                .attr('id', 'maingroup2')
+                .attr("width",innerWidth)
+                .attr("height",innerHeight)
+                // .attr('transform', `translate(${10}, ${-105})`);
+
+                .attr('transform', `translate(${margin.left}, ${margin.top})`);
+            console.log("innerWidth22",innerWidth)
+            console.log("innerHeight22",innerHeight)
+
+
+            var allGroup=["valueA","valueB","valueC"]
+
+            d3.select("#selectButton")
+              .selectAll('myOptions')
+                .data(allGroup)
+              .enter()
+                .append('option')
+              .text(function(d){
+                  return d;
+              })
+              .attr("value",function(d){
+                  return d;
+              })
+
+
+            // X axis
+            var x = d3.scaleLinear()
+                .domain([0, 10]) //比例尺值域
+                .range([0, innerWidth]); //输入的值
+            g2.append("g")
+                .attr("transform", "translate(0," + innerHeight + ")")
+                .call(d3.axisBottom(x))
+                // .selectAll("text")
+                // .attr("transform", "translate(-10,0)rotate(-45)")
+                // .style("text-anchor", "end");
+
+            // Y axis
+            var y = d3.scaleLinear()
+                .domain([0,20])
+                .range([innerHeight,0])
+            g2.append("g")
+                .call(d3.axisLeft(y))
+                .selectAll("text")
+                .attr("transform", "translate(0,0)rotate(-25)")
+
+                //初始化
+            var line=g2.append('g')
+                    //   .select('line')
+                      .append("path")
+                      .datum(data)
+                    //   .enter()
+                    //   append('line')
+                      .attr("d",d3.line()
+                      .x(function(d){
+                          return x(d.time)
+                      })
+                      .y(function(d){
+                          return y(d.valueA)
+                      })
+                      )
+                      .attr("stroke","#69b3a2")
+                      .style("stroke-width",4)
+                      .style("fill","none")
+                //初始化
+            var dot=g2.selectAll('circle')
+                      .data(data)
+                      .enter()
+                      .append('circle')
+                      .attr("cx",function(d)
+                      {
+                          return x(d.time)
+                      })
+                      .attr("cy",function(d){
+                          return y(d.valueA)
+                      })
+                      .attr("r",7)
+                      .style("fill","#69b3a2")
+                      .style("stroke","black")
+             //更新图表的函数
+            function update(selectedGroup){
+                var dataFilter=data.map(function(d){
+                    return {
+                        time:d.time,
+                        value:d[selectedGroup]
+                    } 
+                })
+                
+                //给这些新数据更新
+                line.datum(dataFilter)
+                .transition()
+                .duration(1000)
+                .attr("d",d3.line()
+                .x(function(d){
+                    return x(d.time)
+                })
+                .y(function(d){
+                    return y(d.value)
+                })
+                )
+
+                dot.data(dataFilter)
+                    .transition()
+                    .duration(1000)
+                    .attr("cx",function(d){
+                          return x(d.time)
+                        })
+                      .attr("cy",function(d){
+                          return y(d.value)
+                        })
+                    }
+          
+
+
+            d3.selectAll("#selectButton").on("change",function(d){
+                var selectedOption=d3.select(this).property("value")
+                update(selectedOption)
+            })
+        })
+          
+        
+        //container3
+            d3.csv("container1.csv", function(data) {
+            console.log(1111,data)   
+            console.log(width1)  
+           
+            var margin = {top: height1*0.12, right:  width1*0.02, bottom:  height1*0.45, left: width1*0.2};
+            console.log(margin.left)
+            console.log(margin.right)
+            
+
+            const innerWidth = width1 - margin.left - margin.right;
+            const innerHeight = height1 - margin.top - margin.bottom;
+
+            const g3 = d3.selectAll("#container3")
+                .append('g')
+                .attr('id', 'maingroup3')
+                .attr("width",innerWidth)
+                .attr("height",innerHeight)
+                .attr('transform', `translate(${margin.left}, ${margin.top})`);
+            console.log("innerWidth11",innerWidth)
+            console.log("innerHeight11",innerHeight)
+
+
+            
+
+
+            // X axis
+            var x = d3.scaleLinear()
+                .domain([0,10]) //比例尺值域
+                .range([0, innerWidth]); //输入的值
+            g3.append("g")
+                .attr("transform", "translate(0," + innerHeight + ")")
+                .call(d3.axisBottom(x))
+                .selectAll("text")
+                // .attr("transform", "translate(-10,0)rotate(-45)")
+                // .style("text-anchor", "end");
+
+            // Y axis
+            var y = d3.scaleLinear()
+                .domain([0,20])
+                .range([innerHeight,0])
+            g3.append("g")
+                .call(d3.axisLeft(y))
+                .selectAll("text")
+                .attr("transform", "translate(0,0)rotate(-25)")
+
+                //初始化
+            g3.append('g')
+                .selectAll("dot")
+                .data(data)
+                .enter()
+                .append("circle")
+                .transition()
+                .duration(4000)
+                .attr("cx",function(d){
+                    return x(d.Country);
+                })
+                .attr("cy",function(d){
+                    return y(d.Value);
+                })
+                .attr("r",8)
+                .style("fill","#69b3a2")
+        })
+      
+           
+            //container4
+                var width2=360
+                var height2=300
+                var margin=60
+
+                var radius = Math.min(width2, height2) / 2 - margin
+                const g4 =d3.selectAll("#container4") 
+                    .append("svg")
+                    .attr('id', 'maingroup4')
+                    .attr("width",width2)
+                    .attr("height",height2)
+                    .append("g")
+                    .attr('transform', `translate(${width2/1.5}, ${height2/1.6})`);
+                
+                
+                
+                
+                //     var data={  1:13,
+                //             2:3,
+                //             3:13,
+                //             4:13,
+                //             5:18,
+                //             6:4,
+                //             7:1,
+                //             8:3,
+
+                // }
+                // // var data={a: 13, b: 3, c:30, d:8, e:12}
+                // var color=d3.scaleOrdinal()
+                //             .domain(data)
+                //             .range(d3.schemeSet2);
+
+                // var pie = d3.pie()
+                //             .value(function(d) {return d.value; })
+                //             var data_ready = pie(d3.entries(data))
+                //             var arcGenerator = d3.arc()
+                //             .innerRadius(0)
+                //             .outerRadius(radius)
+
+                //         g4.selectAll('mySlices')
+                //             .data(data_ready)
+                //             .enter()
+                //             .append('path')
+                //                 .attr('d', arcGenerator)
+                //                 .attr('fill', function(d){ return(color(d.data.key)) })
+                //                 .attr("stroke", "#69b3a2")
+                //                 .style("stroke-width", "5px")
+                //                 .style("opacity", 1)
+
+                //         g4.selectAll('mySlices')
+                //             .data(data_ready)
+                //             .enter()
+                //             .append('text')
+                //             .text(function(d){ return  d.data.key})
+                //             .attr("transform", function(d) { 
+                //                 return "translate(" + arcGenerator.centroid(d) + ")";  })
+                //             .style("text-anchor", "middle")
+                //             .style("font-size", 12)
+                //             .style("fill","black")
+                var data=[9,20,30,8,12]
+        console.log(data.sort(d3.descending))
+        // var data=[0.9354072690722368, 0.9012410116850471, 0.8213979312962902, 0.788834456987805, 0.5493705992234341, 0.5244368442924423, 0.48160383209956237, 0.44801626900906055, 0.3522248542242117, 0.2971016096750305]
+
+		// var color= d3.scale.category20();
+        var color=d3.scaleOrdinal(d3.schemeCategory20)
+        console.log((color))
+
+        console.log(typeof(color))
+		// var arc=d3.svg.arc().outerRadius(radius);//定义了一个弧生辰器，外半径设置为radius
+		var arc=d3.arc().outerRadius(radius);//定义了一个弧生辰器，外半径设置为radius
+ 
+		// var pie=d3.layout.pie();				//定义一个饼图布局
+		var pie=d3.pie();				//定义一个饼图布局
+ 
+		// var svg=d3.select('body').append('svg')
+		// 		.attr('width',width)
+		// 		.attr('height',height)
+		// 		.append('g')
+		// 		.attr('transform',"translate("+width/2+","+height/2+")");//添加一个svg,设置宽高，在偏移到中心。
+ 
+		var arcs=g4.selectAll('g.arc')
+				.data(pie(data))			//绑定数据
+				.enter().append('g')		//添加g
+				.attr('class',"arc");		//定义一个arc类
+ 
+		arcs.append('path')					//添加路径
+			.attr('fill',function(d,i){		//根据i的下标给每一个元素添加不同的颜色。
+				return color(i)
+			})
+			.transition()					//设置动画
+			// .ease('bounce')					//动画效果
+            // .ease(d3.easeElasticOut)
+			.duration(2000)					//持续时间
+			.attrTween('d',tweenPie)		//两个属性之间平滑的过渡。
+			.transition()
+			// .ease("d3.elastic")
+            .ease(d3.easeElasticOut)
+			.delay(function(d,i){return 2000+i*50})	//设置了一个延迟时间，让每一个内半径不在同一个时间缩小。
+			.duration(2000)
+			.attrTween('d',tweenDonut)
+ 
+			function tweenPie(b){
+				//这里将每一个的弧的开始角度和结束角度都设置成了0
+				//然后向他们原始的角度(b)开始过渡，完成动画。
+				b.innerRadius=0;	
+				var i=d3.interpolate({startAngle:0,endAngle:0},b);
+				//下面的函数就是过渡函数，他是执行多次最终达到想要的状态。
+				return function(t){return arc(i(t));};
+			}
+ 
+			function tweenDonut(b){
+				//设置内半径不为0
+				b.innerRadius=radius*0.6;
+				//然后内半径由0开始过渡
+				var i=d3.interpolate({innerRadius:0},b);
+				return function(t){return arc(i(t));};
+			}
+ 
+
+        </script> 
+   
+
+
+ <!-- <script> 
+    var t1_text ='id,avgPrice_music,avgPrice_drama,avgPrice_exhibition,avgPrice_sports\n\n' +
+                '[1,298.5,699.0,50,10,]\n\n' +
+                '[2,762.5,580.0,191.0,10,]\n\n' +
+                '[3,762.5,580.0,191.0,10,]\n\n' +
+                '[4,512.5,282.0,10.0,0,]\n\n' +
+                '[5,332.5,2427.0,0,20.0,]\n' 
+                
+            document.getElementById("t1").value = t1_text;
+</script> -->
+
+<script src="js/jquery-3.4.1.min.js"></script>
+<!-- <script src="js/materialize.min.js"></script> -->
+
+</body>

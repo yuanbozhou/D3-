@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+ 
+    .states :hover {
+        fill: red;
+        stroke-width: 2px;
+    }
+ 
+    .state-borders {
+        fill: none;
+        stroke: #fff;
+        stroke-width: 0.5px;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+        pointer-events: none;
+    }
+ 
+</style>
+<svg width="1200" height="800" style="border:1px gainsboro solid"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://d3js.org/topojson.v2.min.js"></script>
+<script src="js/jquery-3.4.1.min.js"></script>
+ 
+<script>
+ 
+ 
+ 
+ 
+    var svg = d3.select("svg"),
+            width = svg.attr("width"),
+            height = svg.attr("height");
+ 
+    var projection = d3.geoMercator()
+            .center([120, 31])
+            .scale(850)
+            // .translate([width/2, height/2+height/6])
+            .translate([width/2, height/2])
+
+    var path = d3.geoPath()
+            .projection(projection);
+ 
+ 
+ 
+    d3.json("hangzhou.json", function(error, us) {
+        if (error) throw error;
+ 
+        svg.append("g")
+                .attr("class", "states")
+                .selectAll("path")
+//                .data(topojson.feature(us, us.objects.states).features)
+                .data(us.features)
+                .enter()
+                .append("path")
+                .attr('stroke','#000')
+                .attr('fill','lightgray')
+                .attr("d", path)
+                .append('title')
+                .text(function(d){
+                    a=d
+                    return d.properties.name
+                });
+ 
+        svg.append("path")
+                .attr("class", "state-borders")
+                .attr("d", path(topojson.mesh(us, us, function(a, b) { return a !== b; })));
+ 
+        a={"value":[{"BusStopCode":"01012","RoadName":"Victoria St","Description":"Hotel Grand Pacific","Latitude":30.160752671000068,"Longitude":120.56942793100006 }]}
+        svg.selectAll("circle")
+                .data(a.value).enter().append("circle")
+                .attr('stroke','red')
+                .attr('fill','green')
+                .attr("d", path)
+                .attr("r", 2)
+                .attr("transform", function(d) {
+                    return "translate(" + projection([
+                                d.center,
+                                d.Latitude
+                            ]) + ")";
+                })
+                .append('title')
+                .text(function(d){
+                    a=d
+                    return d.BusStopCode
+                });
+    });
+ 
+ 
+ 
+ 
+ 
+</script>

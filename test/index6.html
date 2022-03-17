@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+    <title>同城</title>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <!-- 这句如果写了，会影响下面selectButton的出现 -->
+    <link rel="stylesheet" href="css/materialize.min.css">
+
+    
+  
+
+<!-- Create a div where the graph will take place -->
+    
+   <style>
+        body {
+            background: linear-gradient(90deg, #ffffff, #d2e0f8)
+        }
+
+        /* .container {
+            width: 100%;
+
+            float: right;
+            display: flex;
+        } */
+
+        .btn_container {
+            width: 100%;
+            height: 5rem;
+            text-align: center;
+        }
+        .btn_word {
+            width: 100%;
+            height: 5rem;
+            text-align: center;
+        }
+
+        /* .btn_container:after {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        } */
+
+        #toast-container {
+            top: 80%;
+            right: 45%;
+        }
+
+        .bubbles{
+            stroke-width:2px;
+            stroke:white;
+        }
+        .bubbles:hover{
+            stroke:green;
+        }
+   </style>
+</head>
+
+<script language="javascript">
+
+function NextPic()
+                {
+                //    
+                var adres="wordcloud.jpg";
+                console.log(adres)
+                document.getElementById('img').src = adres;
+                // <img src="wordcloud.jpg" width="380px" height="240px" alt="图片未加载" />
+                    
+                }
+</script>
+<script type="text/javascript">
+   
+    function show()
+                {
+                    text=document.getElementById("ta").value
+                    var n1=[],n2=[]
+                    p1=0,p2=0
+                    for(let i=0;i<text.length;i++){
+                        if(text[i]=="["){
+                            n1[p1]=i;
+                            p1++;
+                        }
+                        if(text[i]=="]"){
+                            n2[p2]=i;
+                            p2++;
+                        }
+                    }
+                 selectedData=[]
+                   for(let j=0;j<p1;j++){
+                       selectedData[j]=text.substring(n1[j]+1,n2[j]-1)
+                    //    console.log("selectedData"+j,selectedData[j])
+                   }
+                   
+                    // console.log(selectedData)
+                    c1(selectedData)
+
+                    return text
+                    
+                    // document.getElementById("ta").value =e;
+                    
+                }
+    
+
+   </script>
+
+
+
+    <nav style="background:#007497e0">
+        <div class="nav-wrapper">
+            <a href="main.html" class="brand-logo" style="margin-left: 1rem;font-size: 1.2rem; ">同城数据可视化</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="https://www.douban.com/location/hangzhou/events/future-music">豆瓣同城</a></li>
+               
+            </ul>
+        </div>
+    </nav>
+    <div id="container" class="container" width="800px" height="1200px"></div> 
+
+   <div class="row" style="
+    margin-top: 10px;
+    display: flex;">
+
+      
+         
+        <ul class="collapsible" data-collapsible="accordion" style="
+        margin-left: 4rem;width: rem;height: 54em">
+            <li class="active">
+                <div class="collapsible-header">样本数据</div>
+                <div class="collapsible-body" style="display: block;">
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea id="ta" class="materialize-textarea"
+                                        style="border-bottom: 0px;width: 24rem; height:18em"></textarea>
+                                    <label for="textarea1" id="t1">
+                                        <!-- name,avgPrice_music<br>
+                                       「回暖」2021春夏巡演,298.5<br>
+                                        张杰「曜·北斗」演唱会,762.5<br>
+                                        张韶涵“寓言”世界巡回演唱会,512.5<br>
+                                        久石让钢琴曲梦幻之旅演奏会,332.5<br>
+                                        久石让·宫崎骏音乐会,244.5<br>
+                                        “直到世界尽头”经典动漫演唱会,284.5<br>
+                                        2021汪峰演唱会,512.5<br>
+                                        德国原版绘本启蒙交响音乐会,1491.0<br>
+                                        痛仰乐队「世界会变好」,799.0<br>
+                                        马克西姆古典跨界钢琴演奏会,736.5<br>
+                                        《感谢你爱我》 2021巡游记,293.5<br>
+                                        杭盖2021乘风而归全国巡演,667.5<br>
+                                        2021圣诞超级枕头大战,128<br>
+                                        暖冬摇滚「潜入黑镜」黑屋,150<br>
+                                        【杭州站】「Fine乐团」,816.0<br>
+                                        李大奔「野望」2021全国巡演 杭州站,459.0<br>
+                                        「脑浊乐队」2021全国巡演 杭州站,362.0 -->
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </li>
+
+          
+           </li>
+            <li class="btn_container"  onclick="show()">
+                <a class="waves-effect waves-light btn-large">更新图表</a>  
+           </li>
+
+            <li class="btn_word"  onclick="NextPic()">
+                <a class="waves-effect waves-light btn-large">生成wordCloud</a>
+            </li>
+
+
+            <img id="img" alt="图片未加载" src="wordcloud1.jpg" width="380px" height="200px"  />
+        </ul>
+ 
+
+
+
+
+        
+        <!-- <select id="selectButton" style="border-bottom: 0px;width: 24rem;height:2em"></select> -->
+        <div class="col s12 m7" style="
+            float: right;
+            margin-right: 4rem;
+        ">
+
+            <div class="card">
+                <script>
+                // var width=document.documentElement.clientWidth
+                // var height=document.documentElement.clientHeight
+                var width=800
+                var height=1000
+
+
+                console.log(width,height);
+        
+                d3.select("#container")
+                .attr("width",width)
+                .attr("height",height)
+
+                var width1=800
+                var height1=1000
+          
+
+                </script>
+                    
+                <div id="container" class="card-image container">
+                   
+                    
+               
+
+                    <svg height="800" width="800" id="container3" class="svgs">12345</svg> 
+                    
+            
+                    <!-- <span class="card-title" style="color: #868181;">Graph</span> -->
+
+                    
+                </div>
+
+
+                <div class="card-content" style="background: aliceblue;">
+                    <p>基于d3.js构建</p>
+               </div>
+               
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <body>
+        <script>
+        function c1(selectedData){
+           
+        // id,avgPrice_music,avgPrice_drama,avgPrice_exhibition,avgPrice_sports
+        const data=[
+            {id:'1',avgPrice_music:298.5,avgPrice_drama:699.0,avgPrice_exhibition:50,avgPrice_sports:10},
+            {id:'2',avgPrice_music:762.5,avgPrice_drama:699.0,avgPrice_exhibition:50,avgPrice_sports:10},
+            {id:'3',avgPrice_music:512.5,avgPrice_drama:699.0,avgPrice_exhibition:50,avgPrice_sports:10},
+            {id:'4',avgPrice_music:332.5,avgPrice_drama:699.0,avgPrice_exhibition:50,avgPrice_sports:10},
+        ];
+        // console.log("data[0]"+typeof(data[0]))
+
+        var k=0
+        var temp=[]
+        console.log("len(selectedData)", selectedData.length)
+        for(let i=0;i<selectedData.length;i++){
+            k=0
+            // console.log(selectedData[i]+" :"+selectedData[i].length)
+            for(let j=0;j<selectedData[i].length;j++){
+                
+                if(selectedData[i].substring(j,j+1)==",")
+                {
+                    // console.log("j"+j)
+                    temp[k]=j;
+                    
+                    k++;
+                }
+            }
+           
+           data[i]={
+               id:selectedData[i].substring(0,temp[0]),
+               name:selectedData[i].substring(temp[0]+1,temp[1]),
+
+               avgPrice_music:selectedData[i].substring(temp[1]+1,temp[2]),
+               
+            //    avgPrice_drama:selectedData[i].substring(temp[1]+1,temp[2]),
+               avgPrice_exhibition:selectedData[i].substring(temp[2]+1,temp[3]),
+               avgPrice_sports:selectedData[i].substring(temp[3]+1,temp[4]),
+           }
+           
+           
+        }
+        console.log("data[0].id "+data[0].id)
+        console.log("data[0].name "+data[0].name)
+        console.log("data[0].avgPrice_music "+data[0].avgPrice_music)
+        console.log("data[0].avgPrice_drama "+data[0].avgPrice_drama)
+        // console.log("data[0].avgPrice_exhibition "+data[0].avgPrice_exhibition)
+        // console.log("data[0].avgPrice_sports"+data[0].avgPrice_sports)
+        // console.log("data0 "+data[0])
+        // console.log("data1 "+data[1].id+"  "+data[1].avgPrice_music+"  "+data[1].avgPrice_exhibition)
+        // console.log("data[2]"+data[2])
+        // console.log("data[3]"+data[3])
+
+            // console.log("text",document.getElementById("ta").value)            
+            // d3.csv(selectedData, function(data) {
+            console.log("width1",width1)  
+            console.log("height1",height1) 
+            // e=document.getElementById("ta").value          
+            
+            var margin = {top: height1*0.3,  bottom:  height1*0.2, left: width1*0.21, right:  width1*0.05};
+            // var margin = {top: 20, right: 30, bottom: 40, left: 90},
+            console.log(margin.left)
+            console.log(margin.right)
+            
+
+            const innerWidth = width1 - margin.left - margin.right;
+            const innerHeight = height1 - margin.top - margin.bottom;
+            const g1 = d3.selectAll("#container3")
+                // g1.selectAll(".gG")
+                // .remove()
+                g1.append('g')
+                // .attr('class','gG')
+
+                .attr('id', 'maingroup')
+                // .attr('class','gMaingroup')
+                .attr("width",width1)
+                .attr("height",innerHeight)
+                .attr('transform', `translate(${margin.left}, ${margin.top})`);
+            console.log(22222,innerWidth)
+            
+
+            var allGroup=["avgPrice_music","avgPrice_drama","avgPrice_exhibition","avgPrice_sports"]
+
+
+            d3.select("#selectButton")
+              .selectAll('myOptions')
+                .data(allGroup)
+              .enter()
+                .append('option')
+              .text(function(d){
+                  return d;
+              })
+              .attr("value",function(d){
+                  return d;
+              })
+
+
+            // X axis
+            var x = d3.scaleLinear()
+                .domain([0, 20]) //比例尺值域
+                .range([0, innerWidth]); //输入的值
+            g1.append("g")
+                .attr("transform", "translate(0," + (innerHeight+50) + ")")
+                .call(d3.axisBottom(x))
+                
+                // .selectAll("text")
+                // .attr("transform", "translate(-10,0)rotate(-45)")
+                // .style("text-anchor", "end");
+
+            // Y axis
+            var y = d3.scaleLinear()
+                .domain([0,2600])
+                .range([innerHeight,0])
+            g1.append("g")
+                .call(d3.axisRight(y))
+                .attr("transform", "translate(0," + (50)  + ")")
+
+                //初始化
+            var line=  
+                g1.selectAll(".gPath")
+                   .remove()
+                g1.append('g')
+                      .append("path")
+                      .attr("class","gPath")
+                      .datum(data)
+                    //   .enter()
+                    //   append('line')
+                      .attr("d",d3.line()
+                      .x(function(d){
+                          return x(d.id)
+                      })
+                      .y(function(d){
+                          return y((d.avgPrice_music-220))
+                      })
+                      )
+                      .attr("stroke","black")
+                      .style("stroke-width",4)
+                      .style("fill","none")
+                //初始化
+            var dot= 
+                g1.selectAll(".gCircle")
+                   .remove() 
+            g1.selectAll('circle')
+                      .data(data)
+                      .enter()
+                      .append('circle')
+                      .attr("class","gCircle")
+                      .attr("cx",function(d)
+                      {
+                          return x(d.id)
+                      })
+                      .attr("cy",function(d){
+                          return y((d.avgPrice_music-220))
+                      })
+                      .attr("r",7)
+                      .style("fill","green")
+             //更新图表的函数
+            function update(selectedGroup){
+                var dataFilter=data.map(function(d){
+                    return {
+                        id:d.id,
+                        value:d[selectedGroup]
+                    } 
+                })
+                
+                //给这些新数据更新
+                line.datum(dataFilter)
+                .transition()
+                .duration(1000)
+                .attr("d",d3.line()
+                .x(function(d){
+                    return x(d.id)
+                })
+                .y(function(d){
+                    return y(d.value)
+                })
+                )
+
+                dot.data(dataFilter)
+                    .transition()
+                    .duration(1000)
+                    .attr("cx",function(d){
+                          return x(d.id)
+                        })
+                      .attr("cy",function(d){
+                          return y(d.value)
+                        })
+                    }
+          
+
+
+            d3.selectAll("#selectButton").on("change",function(d){
+                var selectedOption=d3.select(this).property("value")
+                console.log("selectedOption",selectedOption)
+                update(selectedOption)
+            })
+        // })
+        
+        }
+        </script>
+
+<script src="js/kg.js"></script>
+<script src="js/jquery-3.4.1.min.js"></script>
+ <script>
+  
+
+
+
+    // var t1_text ='id,avgPrice_music,avgPrice_drama,avgPrice_exhibition,avgPrice_sports\n\n' +
+    //             '[1,298.5,699.0,50,10,]\n\n' +
+    //             '[2,762.5,580.0,191.0,10,]\n\n' +
+    //             '[3,762.5,580.0,191.0,10,]\n\n' +
+    //             '[4,512.5,282.0,10.0,0,]\n\n' +
+    //             '[5,332.5,2427.0,0,20.0,]\n' 
+    var t1_text ='id,name,avgPrice_music\n\n' +
+                '[1,李大奔「野望」2021全国巡演  杭州站,719,]\n' +
+                '[2,「丢火车」《感谢你爱我》,467,]\n' +
+                '[3,德国原版绘本启蒙交响音乐会,1284,]\n' +
+                '[4,Fine乐团」《天花板》2021巡演,1352,]\n' +
+                '[5,久石让钢琴曲梦幻之旅,570,]\n' + 
+                '[6,暖冬摇滚「潜入黑镜」黑屋,150,]\n' +
+                '[7,杭盖2021乘风而归全国巡演,1165,]\n' +
+                '[8,马克西姆古典跨界钢琴演奏会 杭州站,2402,]\n' +
+                '[9,【杭州站】2021圣诞超级枕头大战,128,]\n' +
+                '[10,【延期】橘子海「回暖」2021春夏巡演,410,]\n' +
+                '[11,【杭州】天空之城—久石让·宫崎骏音乐会,392,]\n' +
+                '[12,【杭州】2021直到世界尽头动漫演唱会,380,]\n' +
+                '[13,「脑浊乐队」2021全国巡演 杭州站,624,]\n'
+            document.getElementById("ta").value = t1_text;
+</script>
+    </body>
+   
+
+

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+    <meta charset="utf-8" />
+    <title>同城</title>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <link rel="stylesheet" href="css/materialize.min.css">
+
+   
+
+    <style>
+        body {
+            background: linear-gradient(90deg, #ffffff, #d2e0f8)
+        }
+
+        .container {
+            width: 100%;
+            height: 35rem;
+
+            float: right;
+            display: flex;
+        }
+
+        .btn_container {
+            width: 100%;
+            height: 10rem;
+            text-align: center;
+        }
+
+        .btn_container:after {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        #toast-container {
+            top: 80%;
+            right: 45%;
+        }
+
+        .bubbles{
+            stroke-width:2px;
+            stroke:white;
+        }
+        .bubbles:hover{
+            stroke:green;
+        }
+    </style>
+</head>
+<script>   
+    function show()
+                {
+                    console.log("5的位置");
+                    
+                    return "./wordCloud.jpg"
+                   
+                }
+</script>
+
+
+    <nav style="background:#007497e0">
+        <div class="nav-wrapper">
+            <a href="main.html" class="brand-logo" style="margin-left: 1rem;font-size: 1.2rem; ">同城数据可视化</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="https://www.douban.com/location/hangzhou/events/future-music">豆瓣同城页面</a></li>
+               
+            </ul>
+        </div>
+    </nav>
+    <!-- <div id="container" class="container"></div> -->
+
+    <div class="row" style="
+    margin-top: 10px;
+    display: flex;">
+
+        <ul class="collapsible" data-collapsible="accordion" style="
+        margin-left: 4rem;width: 26rem">
+            <li class="active">
+                <div class="collapsible-header">样本数据</div>
+                <div class="collapsible-body" style="display: block;">
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea id="ta" class="materialize-textarea"
+                                        style="border-bottom: 0px;width: 24rem; height:18em"></textarea>
+                                    <label for="textarea1" id="t1">
+                                        <!-- name,avgPrice_music<br> -->
+                                       「回暖」2021春夏巡演,298.5<br>
+                                        张杰「曜·北斗」演唱会,762.5<br>
+                                        张韶涵“寓言”世界巡回演唱会,512.5<br>
+                                        久石让钢琴曲梦幻之旅演奏会,332.5<br>
+                                        久石让·宫崎骏音乐会,244.5<br>
+                                        “直到世界尽头”经典动漫演唱会,284.5<br>
+                                        2021汪峰演唱会,512.5<br>
+                                        德国原版绘本启蒙交响音乐会,1491.0<br>
+                                        痛仰乐队「世界会变好」,799.0<br>
+                                        马克西姆古典跨界钢琴演奏会,736.5<br>
+                                        《感谢你爱我》 2021巡游记,293.5<br>
+                                        杭盖2021乘风而归全国巡演,667.5<br>
+                                        2021圣诞超级枕头大战,128<br>
+                                        暖冬摇滚「潜入黑镜」黑屋,150<br>
+                                        【杭州站】「Fine乐团」,816.0<br>
+                                        李大奔「野望」2021全国巡演 杭州站,459.0<br>
+                                        「脑浊乐队」2021全国巡演 杭州站,362.0
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </li>
+
+          
+           </li>
+            <li class="btn_container"  onclick="show()">
+                <a class="waves-effect waves-light btn-large">生成wordCloud</a>
+                <!-- <img src="x" onerror="javscript:this.scr=javascript:show()" width="350px" alt="图片未加载" /> -->
+            </li>
+            <img src="wordcloud.jpg" width="380px" height="240px" alt="图片未加载" />
+            <!-- <script>
+            function c1(){
+                <img src="wordcloud.jpg" width="350px" alt="图片未加载" />
+            }
+           </script> -->
+        </ul>
+
+
+
+
+
+        <div class="col s12 m7" style="
+            float: right;
+            margin-right: 4rem;
+        ">
+
+            <div class="card">
+                <script>
+                var width=1000
+                var height=1200
+
+                console.log(width,height);
+        
+                
+                </script>
+     
+     
+     
+                 <div id="container2">  </div>     
+                    <input type="number" id="buttonSize1" width="12px" height="50px" font-size="10" value=1000>
+                   
+                    <svg height="800" width="1200" id="container1">
+
+                        
+                    </svg>                    
+                
+
+                <div class="card-content" style="background: aliceblue;">
+                    <p>基于d3.js构建</p>
+               </div>
+
+               <div class="card1" height="20" width="20">
+                <svg height="20" width="20" id="containerRight" class="svgs">12345</svg> 
+                
+            </div>
+            </div>
+        </div> 
+    </div>
+    <body>
+        <script>
+            var width1=800
+            var height1=1200
+            var margin = {top: height1*0.05, right:  width1*0.05, bottom:  height1*0.65, left: width1*0.15};
+             
+            // var margin = {top: 20, right: 30, bottom: 40, left: 90},
+            console.log(margin.left)
+            console.log(margin.right)
+            
+
+
+            const innerWidth = width1 - margin.left - margin.right;
+            const innerHeight = height1 - margin.top - margin.bottom;
+            console.log("000",margin.right)
+            
+            const g1 =d3.selectAll("#container1") 
+                .append('g')
+                .attr('id', 'maingroup1')
+                .attr("width",innerWidth)
+                .attr("height",innerHeight)
+                // .attr('transform', `translate(${10}, ${-105})`);
+
+                .attr('transform', `translate(${margin.left}, ${margin.top})`);
+            
+                console.log("innerWidth22",innerWidth)
+                console.log("innerHeight22",innerHeight)
+          
+
+             //container1            
+             d3.csv("container2.csv", 
+             function(d) {
+                return {
+                     date : d3.timeParse("%Y-%m-%d")(d.date),
+                     value : d.value,
+                     name  : d.name }
+             },
+
+            function(data){
+            
+            var x = d3.scaleTime()
+                .domain(d3.extent(data, function(d) { return d.date; })) //比例尺值域
+                .range([0, innerWidth]); //输入的值
+            g1.append("g")
+                .attr("transform", "translate(0," + innerHeight + ")")
+                .call(d3.axisBottom(x))
+                // .selectAll("text")
+                // .attr("transform", "translate(-10,0)rotate(-45)")
+                // .style("text-anchor", "end");
+
+            // Y axis
+            var y = d3.scaleLinear()
+                .domain([0,8000])
+                .range([innerHeight,0])
+            g1.append("g")
+                .call(d3.axisLeft(y))
+
+            g1.append("path")
+            .datum(data)
+            .attr("fill", "none")
+            .attr("stroke", "black")
+            .attr("stroke-width", 1.5)
+            .attr("d", d3.line()
+                .curve(d3.curveBasis) // Just add that to have a curve instead of segments
+                .x(function(d) { return x(d.date) })
+                .y(function(d) { return y(d.value) })
+                // .z(function(d) { return z(d.name)})
+                )
+
+            
+                var Tooltip = d3.select("#container2")
+                                .append("div")
+                                .style("opacity", 0)
+                                .attr("class", "tooltip")
+                                .attr("width","20px")
+                                .style("background-color", "white")
+                                .style("border", "solid")
+                                .style("border-width", "2px")
+                                .style("border-radius", "5px")
+                                .style("padding", "5px")
+
+                                // Three function that change the tooltip when user hover / move / leave a cell
+                                var mouseover = function(d) {
+                                    Tooltip.style("opacity", 1)
+                                }
+                                var mousemove = function(d) {
+                                    Tooltip.html(d.name +"    Top Price: "+d.value)
+                                    .style("left", (d3.mouse(this)[0]+70) + "px")
+                                    .style("top", (d3.mouse(this)[1]) + "px")
+                                }
+                                var mouseleave = function(d) {
+                                    Tooltip.style("opacity", 0)
+                                }
+
+                                // Add the points
+                                g1.append("g")
+                                .attr("class","gCircle")
+                                .selectAll("dot")
+                                .data(data)
+                                .enter()
+                                .append("circle")
+                                    .attr("class", "myCircle")
+                                    .attr("cx", function(d) { return x(d.date) } )
+                                    .attr("cy", function(d) { return y(d.value) } )
+                                    .attr("r", 8)
+                                    .attr("stroke", "#69b3a2")
+                                    .attr("stroke-width", 3)
+                                    .attr("fill", "white")
+                                    .on("mouseover", mouseover)
+                                    .on("mousemove", mousemove)
+                                    .on("mouseleave", mouseleave)
+                                                    
+                                                    function changeSize() {
+                                                            //   theCircle
+                                                            //    .attr("r", this.value)
+                                        
+                                                                xlim = parseInt(this.value)
+                                                                console.log("xlim",typeof(xlim))
+                                                                
+                                                                // .selectAll(".myCircle")
+                                                                // .selectAll("circle")
+                                                                g1.selectAll(".gCircle")
+                                                                    .remove()
+                                                                    
+                                                                g1.append("g")
+                                                                  .attr("class","gCircle")
+                                                                    .selectAll("dot")
+                                                                    .data(data)
+                                                                    .enter()
+                                                                    .append("circle")
+                                                                        .attr("class", "myCircle")
+                                                                        .attr("cx", function(d) { return x(d.date) } )
+                                                                        .attr("cy", function(d) { return y(d.value) } )
+                                                                        //.attr("r", xlim)
+                                                                        .attr("r", function(d) { 
+                                                                            d.value=parseInt(d.value);
+                                                                            if((d.value)>xlim) 
+                                                                            {
+                                                                                
+                                                                                return 18;
+                                                                            }
+                                                                            else {
+                                                                                console.log("d.value",typeof(d.value));
+                                                                                return 0;
+                                                                            } 
+                                                                        })
+                                                                    
+                                                                        .attr("stroke", "#69b3a2")
+                                                                        .attr("stroke-width", 3)
+                                                                        .attr("fill", "white")
+                                                                        .on("mouseover", mouseover)
+                                                                        .on("mousemove", mousemove)
+                                                                        .on("mouseleave", mouseleave)
+                                            }
+                                            d3.select("#buttonSize1").on("input", changeSize)
+                                })
+
+// var theCircle = d3.select("#dataviz_buttonEventListener")
+//   .append("svg")
+//   .append("circle")
+//     .attr("cx", 100)
+//     .attr("cy", 70)
+//     .attr("stroke", "black")
+//     .style("fill", "#69b3a2")
+//     .attr("r", 20)
+
+
+       
+   
+        </script> 
+
+    </body>
+
+

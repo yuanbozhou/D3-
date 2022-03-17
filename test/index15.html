@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>第一个 ECharts 实例</title>
+    <!-- 引入 echarts.js -->
+    <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main1" style="width: 800px;height:600px;"></div>
+    <br><br>
+    <div id="main21" style="width: 900px;height:500px;"></div>
+    <div id="main22" style="width: 800px;height:600px;"></div>
+    <script type="text/javascript">
+       
+ 
+        // 指定图表的配置项和数据
+        var chartDom = document.getElementById('main1');
+        var myChart = echarts.init(chartDom);
+        option1 = {
+                    backgroundColor: '#2c343c',
+                    title: {
+                        text: '总图',
+                        left: 'center',
+                        top: 20,
+                        textStyle: {
+                        color: '#ccc'
+                        }
+                    },
+                    tooltip: {
+                        trigger: 'item'
+                    },
+                    visualMap: {
+                        show: false,
+                        min: 80,
+                        max: 600,
+                        inRange: {
+                        colorLightness: [0, 1]
+                        }
+                    },
+                    series: [
+                        {
+                        name: 'In 杭州 近期活动',
+                        type: 'pie',
+                        radius: '55%',
+                        center: ['50%', '50%'],
+                        data: [
+                            { value: 17, name: '音乐类' },
+                            { value: 20, name: '戏剧类' },
+                            { value: 20, name: '展览类' },
+                            { value: 17, name: '运动类' },
+                            // { value: 400, name: 'Search Engine' }
+                        ].sort(function (a, b) {
+                            return a.value - b.value;
+                        }),
+                        roseType: 'radius',
+                        label: {
+                            color: 'rgba(255, 255, 255, 0.3)'
+                        },
+                        labelLine: {
+                            lineStyle: {
+                            color: 'white'
+                            },
+                            smooth: 0.2,
+                            length: 10,
+                            length2: 20
+                        },
+                        itemStyle: {
+                            color: 'white',
+                            shadowBlur: 200,
+                            shadowColor: 'white'
+                        },
+                        animationType: 'scale',
+                        animationEasing: 'elasticOut',
+                        animationDelay: function (idx) {
+                            return Math.random() * 200;
+                        }
+                        }
+                    ]
+                    };
+        myChart.setOption(option1);
+            
+            
+                    // 基于准备好的dom，初始化echarts实例
+        // import * as echarts from 'echarts';
+
+        var chartDom= document.getElementById('main21');
+        var myChart = echarts.init(chartDom);
+        option21 = {
+  title: {
+    text: 'Stacked Area Chart'
+  },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'cross',
+      label: {
+        backgroundColor: '#6a7985'
+      }
+    }
+  },
+  legend: {
+    data: ['音乐', '戏剧', '展览', '运动']
+  },
+  toolbox: {
+    feature: {
+      saveAsImage: {}
+    }
+  },
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  xAxis: [
+    {
+      type: 'category',
+      boundaryGap: false,
+      data: [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]
+    }
+  ],
+  yAxis: [
+    {
+      type: 'value'
+    }
+  ],
+  series: [
+    {
+      name: '音乐',
+      type: 'line',
+      stack: 'Total',
+      areaStyle: {},
+      emphasis: {
+        focus: 'series'
+      },
+      data: [298.5,762.5,512.5,332.5,244.5,284.5,512.5,1491,799,736.5,293.5,667.5,
+      128,150,816,459,362],
+    },
+    {
+      name: '戏剧',
+      type: 'line',
+      stack: 'Total',
+      areaStyle: {},
+      emphasis: {
+        focus: 'series'
+      },
+      data: [69,658,82,427,29.5,245.5,90.5,69
+      ,75.5,27,32,43,22.5,243,252,239.5,29.5]
+    },
+    {
+      name: '展览',
+      type: 'line',
+      stack: 'Total',
+      areaStyle: {},
+      emphasis: {
+        focus: 'series'
+      },
+      data: [50,191,10,0,45,0,0,0,0,45,0,0,0,200,24,0,140]
+    },
+    {
+      name: '运动',
+      type: 'line',
+      stack: 'Total',
+      areaStyle: {},
+      emphasis: {
+        focus: 'series'
+      },
+      data: [10,10,0,20,0,0,0,0,0,0,0,34.5,138,0,0,0,0,]
+    },
+  ]
+};    
+
+  
+        option21 && myChart.setOption(option21);
+
+
+
+
+        var chartDom= document.getElementById('main22');
+                var myChart = echarts.init(chartDom);
+            
+                
+
+
+
+        option22 && myChart.setOption(option22);
+ 
+       
+    </script>
+</body>
+</html>

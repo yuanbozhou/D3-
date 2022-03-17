@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<select id="selectButton" style="border-bottom: 0px;width: 24rem;height:2em"></select>
+<head>
+    <meta charset="utf-8" />
+    <title>同城</title>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <link rel="stylesheet" href="css/materialize.min.css">
+
+   
+
+    <style>
+        body {
+            background: linear-gradient(90deg, #ffffff, #d2e0f8)
+        }
+
+        .container {
+            width: 100%;
+            height: 35rem;
+
+            float: right;
+            display: flex;
+        }
+
+        .btn_container {
+            width: 100%;
+            height: 10rem;
+            text-align: center;
+        }
+
+        .btn_container:after {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        #toast-container {
+            top: 80%;
+            right: 45%;
+        }
+
+        .bubbles{
+            stroke-width:2px;
+            stroke:white;
+        }
+        .bubbles:hover{
+            stroke:green;
+        }
+    </style>
+</head>
+<script>   
+    function show()
+                {
+                    console.log("5的位置");
+                    
+                    return "./wordCloud.jpg"
+                   
+                }
+</script>
+
+
+    <nav style="background:#007497e0">
+        <div class="nav-wrapper">
+            <a href="main.html" class="brand-logo" style="margin-left: 1rem;font-size: 1.2rem; ">同城数据可视化</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="https://www.douban.com/location/hangzhou/events/future-music">豆瓣同城页面</a></li>
+               
+            </ul>
+        </div>
+    </nav>
+    <!-- <div id="container" class="container"></div> -->
+    <select id="selectButton" style="border-bottom: 0px;width: 24rem;height:2em"></select>
+    <div class="row" style="
+    margin-top: 10px;
+    display: flex;">
+
+        <ul class="collapsible" data-collapsible="accordion" style="
+        margin-left: 4rem;width: 26rem">
+            <li class="active">
+                <div class="collapsible-header">样本数据</div>
+                <div class="collapsible-body" style="display: block;">
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea id="ta" class="materialize-textarea"
+                                        style="border-bottom: 0px;width: 24rem; height:18em"></textarea>
+                                    <label for="textarea1" id="t1">
+                                        <!-- name,avgPrice_music<br> -->
+                                       「回暖」2021春夏巡演,298.5<br>
+                                        张杰「曜·北斗」演唱会,762.5<br>
+                                        张韶涵“寓言”世界巡回演唱会,512.5<br>
+                                        久石让钢琴曲梦幻之旅演奏会,332.5<br>
+                                        久石让·宫崎骏音乐会,244.5<br>
+                                        “直到世界尽头”经典动漫演唱会,284.5<br>
+                                        2021汪峰演唱会,512.5<br>
+                                        德国原版绘本启蒙交响音乐会,1491.0<br>
+                                        痛仰乐队「世界会变好」,799.0<br>
+                                        马克西姆古典跨界钢琴演奏会,736.5<br>
+                                        《感谢你爱我》 2021巡游记,293.5<br>
+                                        杭盖2021乘风而归全国巡演,667.5<br>
+                                        2021圣诞超级枕头大战,128<br>
+                                        暖冬摇滚「潜入黑镜」黑屋,150<br>
+                                        【杭州站】「Fine乐团」,816.0<br>
+                                        李大奔「野望」2021全国巡演 杭州站,459.0<br>
+                                        「脑浊乐队」2021全国巡演 杭州站,362.0
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </li>
+
+            <select id="selectButton" style="border-bottom: 0px;width: 24rem;height:2em"></select>
+           </li>
+            <li class="btn_container"  onclick="show()">
+                <a class="waves-effect waves-light btn-large">生成wordCloud</a>
+                <select id="selectButton" style="border-bottom: 0px;width: 24rem;height:2em"></select>
+                <!-- <img src="x" onerror="javscript:this.scr=javascript:show()" width="350px" alt="图片未加载" /> -->
+            </li>
+            <img src="wordcloud.jpg" width="380px" height="240px" alt="图片未加载" />
+            <!-- <script>
+            function c1(){
+                <img src="wordcloud.jpg" width="350px" alt="图片未加载" />
+            }
+           </script> -->
+        </ul>
+ 
+
+
+
+
+
+        
+        <div class="col s12 m7" style="
+            float: right;
+            margin-right: 4rem;
+        ">
+<select id="selectButton" style="border-bottom: 0px;width: 24rem;height:2em"></select>
+            <div class="card">
+                <script>
+                var width=document.documentElement.clientWidth
+                var height=document.documentElement.clientHeight
+
+                console.log(width,height);
+        
+                d3.select("#container")
+                .attr("width",width)
+                .attr("height",height)
+
+                var width1=800
+                var height1=500
+          
+
+             
+                </script>
+                <!-- <div id="container3">  </div>     
+                <input type="number" id="buttonSize" value=9000>
+                   
+                <div id="container" class="card-image container">               
+                <input id="selectButton" style="border-bottom: 0px;width: 10rem;height:2em"></input> -->
+
+                   
+                    
+            
+
+                    <svg height="500" width="600" id="container3" class="svgs">12345
+                        
+                        <!-- <select id="selectButton" width: 10rem;height:2em"></select> -->
+                        <a xlink:href="index6.html">
+                            <rect x="230" y="10" width="70" height="30" rx="10" ry="10"
+                                  style="fill:white"/>
+                            <text x="240" y="30" font-size="12" fill="black">interaction</text>
+                        </a>
+                    </svg> 
+                    
+                    <select id="selectButton" style="border-bottom: 0px;width: 10rem;height:2em"></select>
+            
+                    <!-- <span class="card-title" style="color: #868181;">Graph</span> -->
+                    <div class="card-content" style="background: aliceblue;">
+                    
+                    <p>基于d3.js构建</p>
+               </div>
+                </div>
+
+               
+               
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <body>
+        
+        <script>
+            
+            
+            d3.csv("connectedscatter1.csv", function(data) {
+            console.log("width1",width1)  
+            console.log("height1",height1) 
+            
+           
+            
+            var margin = {top: height1*0.1,  bottom:  height1*0.1, left: width1*0.15, right:  width1*0.35};
+            // var margin = {top: 20, right: 30, bottom: 40, left: 90},
+            console.log(margin.left)
+            console.log(margin.right)
+            
+
+            const innerWidth = width1 - margin.left - margin.right;
+            const innerHeight = height1 - margin.top - margin.bottom;
+            const g = d3.selectAll("#container3")
+                .append('g')
+                // g.selectAll("#selectButton")
+                // .append("#selectButton")
+                // .selectAll("#maingroup")
+                // .remove()
+                .attr('id', 'maingroup')
+                .attr("width",innerWidth)
+                .attr("height",innerHeight)
+                .attr('transform', `translate(${margin.left}, ${margin.top})`);
+            console.log(2222,innerWidth)
+
+
+            var allGroup=["avgPrice_music","avgPrice_drama","avgPrice_exhibition","avgPrice_sports"]
+
+
+            d3.select("#selectButton")
+              .selectAll('myOptions')
+                .data(allGroup)
+              .enter()
+                .append('option')
+              .text(function(d){
+                  return d;
+              })
+              .attr("value",function(d){
+                  return d;
+              })
+
+
+            // X axis
+            var x = d3.scaleLinear()
+                .domain([0, 20]) //比例尺值域
+                .range([0, innerWidth]); //输入的值
+            g.append("g")
+                .attr("transform", "translate(0," + innerHeight + ")")
+                .call(d3.axisBottom(x))
+                // .selectAll("text")
+                // .attr("transform", "translate(-10,0)rotate(-45)")
+                // .style("text-anchor", "end");
+
+            // Y axis
+            var y = d3.scaleLinear()
+                .domain([0,2600])
+                .range([innerHeight,0])
+            g.append("g")
+                .call(d3.axisLeft(y))
+
+                //初始化
+            var line=g.append('g')
+                    //   .select('line')
+                      .append("path")
+                      .datum(data)
+                    //   .enter()
+                    //   append('line')
+                      .attr("d",d3.line()
+                      .x(function(d){
+                          return x(d.id)
+                      })
+                      .y(function(d){
+                          return y(d.avgPrice_music)
+                      })
+                      )
+                      .attr("stroke","black")
+                      .style("stroke-width",4)
+                      .style("fill","none")
+                //初始化
+            var dot=g.selectAll('circle')
+                      .data(data)
+                      .enter()
+                      .append('circle')
+                    //   g.selectAll("circle")
+                    //    .remove()
+                      .attr("cx",function(d)
+                      {
+                          return x(d.id)
+                      })
+                      .attr("cy",function(d){
+                          return y(d.avgPrice_music)
+                      })
+                      .attr("r",7)
+                      .style("fill","green")
+
+             //更新图表的函数
+            function update(selectedGroup){
+                var dataFilter=data.map(function(d){
+                    return {
+                        id:d.id,
+                        value:d[selectedGroup]
+                    } 
+                })
+                
+                //给这些新数据更新
+                line.datum(dataFilter)
+                .transition()
+                .duration(1000)
+                .attr("d",d3.line()
+                .x(function(d){
+                    return x(d.id)
+                })
+                .y(function(d){
+                    return y(d.value)
+                })
+                )
+
+                dot.data(dataFilter)
+                    .transition()
+                    .duration(1000)
+                    .attr("cx",function(d){
+                          return x(d.id)
+                        })
+                      .attr("cy",function(d){
+                          return y(d.value)
+                        })
+                    }
+          
+
+
+            d3.selectAll("#selectButton").on("change",function(d){
+                var selectedOption=d3.select(this).property("value")
+                update(selectedOption)
+            })
+        })
+        </script>
+
+    <script src="js/kg.js"></script>
+    <script src="js/jquery-3.4.1.min.js"></script>
+
+        <script>
+            var t1_text = '{' +
+                '"1": {"name": "数据结构","type": "学科"},\n' +
+                '"2": { "name": "二叉树", "type": "知识点"},\n' +
+                '"3": {"name": "链表","type": "知识点"},\n' +
+                '"4": {"name": "平衡二叉树","type": "知识点"},\n' +
+                "}"
+            document.getElementById("t1").value = t1_text;
+        </script>
+
+<script src="js/jquery-3.4.1.min.js"></script>
+<!-- <script src="js/materialize.min.js"></script> -->
+    </body>
+   
+
+

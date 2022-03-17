@@ -1,0 +1,77 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>中国地图</title>
+</head>
+<body>
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="http://www.ourd3js.com/library/multext.js" charset="utf-8"></script>
+<script>
+    var width  = 630;
+    var height = 630;
+    var svg = d3.select("body")//定位页面位置
+        .append("svg")//添加画布
+        .attr("width", width)//添加宽度
+        .attr("height", height)//添加高度
+        .append("g")//添加元素
+        .attr("transform", "translate(0,0)");
+    //投影函数
+    var projection = d3.geo.mercator()//投影方式
+        .center([102, 25])//设置中心位置，数据是指经纬度
+        .scale(3800)//设置放大比例
+        .translate([width/2, height/2]);//设置平移
+    //地理生成器：根据地理数据生成SVG的path元素的路径值
+    var path = d3.geo.path()//svg的预定义元素：rect矩形、circle圆形、eclipse椭圆、line线段、polyline折线、polygon多边形、path路径
+        .projection(projection);//从球面投影到平面
+
+    // var color = d3.scale.category20();
+    // console.log(path);
+    d3.json("hangzhou.json", function(error, root) {
+        if (error){
+            console.log(root.features);
+            return console.error(error);}
+        // console.log(root.features);
+        svg.selectAll("path")
+            .data( root.features )//引入数据
+            .enter()
+            .append("path")//添加路径
+            // .attr("stroke","#fff")//设置边线颜色
+            .attr("stroke","black")//设置边线颜色
+            .attr("stroke-width",1)//设置边线宽度
+            .attr("fill","#b6c9f7")//设置填充颜色
+            .attr("d", path )
+            
+            .on("mouseover",function(d,i){//设置鼠标悬浮样式
+                d3.select(this)
+                    // .attr("fill","#778de6")
+                    .attr("fill","black")
+            })
+            .on("mouseout",function(d,i){//设置鼠标离开样式
+                d3.select(this)
+                    .attr("fill","#b6c9f7");
+            })
+            .append('title')
+                .text(function(d){
+                    // a=d
+                    return d.properties.name
+                });
+        // var name=[];
+        // var local=[];
+        // console.log("root.features.length",root.features.length)
+        // for(var i=0;i<root.features.length;i++){
+
+        //     console.log("root.features[i].properties.name",root.features[i].properties.name)
+        //     name.push(root.features[i].properties.name);
+
+        //     console.log("root.features[i].properties.cp",root.features[i].properties.cp)
+        //     local.push(root.features[i].properties.cp);
+        // }
+        // for(var j=0;j<name.length;j++){
+        //     var localPosition=projection(local[j]);
+        //     appendMultiText(svg,name[j],localPosition[0]-30,localPosition[1]-10,70,14);
+
+        // }
+    });
+</script>
+</body>
+</html>

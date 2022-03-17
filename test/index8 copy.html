@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+    <meta charset="utf-8" />
+    <title>同城</title>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <link rel="stylesheet" href="css/materialize.min.css">
+    
+   
+
+    <style>
+        body {
+            background: linear-gradient(90deg, #ffffff, #d2e0f8)
+        }
+
+        .container {
+            width: 100%;
+            height: 35rem;
+
+            float: right;
+            display: flex;
+        }
+
+        .btn_container {
+            width: 100%;
+            height: 10rem;
+            text-align: center;
+        }
+
+        .btn_container:after {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        #toast-container {
+            top: 80%;
+            right: 45%;
+        }
+
+        .bubbles{
+            stroke-width:2px;
+            stroke:white;
+        }
+        .bubbles:hover{
+            stroke:green;
+        }
+    </style>
+</head>
+<script>   
+    function show()
+                {
+                    console.log("5的位置");
+                    
+                    return "./wordCloud.jpg"
+                   
+                }
+</script>
+
+
+    <nav style="background:#007497e0">
+        <div class="nav-wrapper">
+            <a href="main.html" class="brand-logo" style="margin-left: 1rem;font-size: 1.2rem; ">同城数据可视化</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="https://www.douban.com/location/hangzhou/events/future-music">豆瓣同城页面</a></li>
+               
+            </ul>
+        </div>
+    </nav>
+    <!-- <div id="container" class="container"></div> -->
+
+    <div class="row" style="
+    margin-top: 10px;
+    display: flex;">
+
+        <ul class="collapsible" data-collapsible="accordion" style="
+        margin-left: 4rem;width: 26rem">
+            <li class="active">
+                <div class="collapsible-header">样本数据</div>
+                <div class="collapsible-body" style="display: block;">
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea id="ta" class="materialize-textarea"
+                                        style="border-bottom: 0px;width: 24rem; height:18em"></textarea>
+                                    <label for="textarea1" id="t1">
+                                        <!-- name,avgPrice_music<br> -->
+                                       「回暖」2021春夏巡演,298.5<br>
+                                        张杰「曜·北斗」演唱会,762.5<br>
+                                        张韶涵“寓言”世界巡回演唱会,512.5<br>
+                                        久石让钢琴曲梦幻之旅演奏会,332.5<br>
+                                        久石让·宫崎骏音乐会,244.5<br>
+                                        “直到世界尽头”经典动漫演唱会,284.5<br>
+                                        2021汪峰演唱会,512.5<br>
+                                        德国原版绘本启蒙交响音乐会,1491.0<br>
+                                        痛仰乐队「世界会变好」,799.0<br>
+                                        马克西姆古典跨界钢琴演奏会,736.5<br>
+                                        《感谢你爱我》 2021巡游记,293.5<br>
+                                        杭盖2021乘风而归全国巡演,667.5<br>
+                                        2021圣诞超级枕头大战,128<br>
+                                        暖冬摇滚「潜入黑镜」黑屋,150<br>
+                                        【杭州站】「Fine乐团」,816.0<br>
+                                        李大奔「野望」2021全国巡演 杭州站,459.0<br>
+                                        「脑浊乐队」2021全国巡演 杭州站,362.0
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </li>
+
+          
+           </li>
+            <li class="btn_container"  onclick="show()">
+                <a class="waves-effect waves-light btn-large">生成wordCloud</a>
+                <!-- <img src="x" onerror="javscript:this.scr=javascript:show()" width="350px" alt="图片未加载" /> -->
+            </li>
+            <img src="wordcloud.jpg" width="380px" height="240px" alt="图片未加载" />
+          
+        </ul>
+ 
+
+
+
+
+        <div class="col s12 m7" style="
+            float: right;
+            margin-right: 4rem;
+        ">
+ 
+            <div class="card">
+                <script>
+                var width1=1000
+                var height1=500
+
+                console.log(width1,height1);
+              </script>
+                   
+                    <svg height="500" width="1200" id="container1"></svg>                    
+                    <input type="number" id="buttonSize1" width="12px" height="50px" font-size="10" value=1000>
+                                    
+                     <svg height="400" width="1200" id="container2">
+                        
+                    </svg>  
+                    <div  height="40" width="120" id="container3">  </div>  
+
+                <div class="card-content" style="background: aliceblue;">
+                    <p>基于d3.js构建</p>
+               </div>
+
+              
+            </div>
+        </div> 
+    </div>
+    <body>
+    
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script>
+        pp=""
+        selectedData=[]  
+        var temp=0
+        var width  = 800;
+        var height = 500;
+        var svg = d3.select("#container1")//定位页面位置
+            .append("svg")//添加画布
+            .attr("width", width)//添加宽度
+            .attr("height", height)//添加高度
+            .append("g")//添加元素
+            .attr("transform", "translate(0,0)");
+        //投影函数
+        var projection = d3.geo.mercator()//投影方式
+            .center([120, 30])//设置中心位置，数据是指经纬度
+            .scale(16000)//设置放大比例
+            .translate([width/1.4, height/2.5]);//设置平移
+        //地理生成器：根据地理数据生成SVG的path元素的路径值
+        var path = d3.geo.path()//svg的预定义元素：rect矩形、circle圆形、eclipse椭圆、line线段、polyline折线、polygon多边形、path路径
+            .projection(projection);//从球面投影到平面
+    
+        // var color = d3.scale.category20();
+        // console.log(path);
+        d3.json("hangzhou.json", function(error, root) {
+            if (error){
+                // console.log(root.features);
+                return console.error(error);
+            // console.log(root.features);
+            }
+           
+            svg.selectAll("path")
+                .data(root.features)//引入数据
+                .enter()
+                .append("path")//添加路径
+                // .attr("stroke","#fff")//设置边线颜色
+                .attr("stroke","white")//设置边线颜色
+                .attr("stroke-width",1)//设置边线宽度
+                .attr("fill","#69b3a2")//设置填充颜色
+                .attr("d", path )
+                
+                .on("mouseover",function(d,i){//设置鼠标悬浮样式
+                    d3.select(this)
+                        // .attr("fill","#778de6")
+                        .attr("fill","#b6c9f7")
+                })
+                .on("mousedown",function(d,i){//设置鼠标悬浮样式
+                   temp=d.properties.name
+                   c2(temp)
+                   
+                //    console.log(temp)
+                //    console.log(d.properties.name)
+                })
+                .on("mouseout",function(d,i){//设置鼠标离开样式
+                    d3.select(this)
+                        .attr("fill","#69b3a2");
+                })
+                .append('title')
+                    .text(function(d){
+                        // a=d
+                        return d.properties.name
+                    });
+                
+                var texts=svg.selectAll(".texts")
+                             .data(root.features)
+                             .enter()
+                             .append("text")
+                             .attr("class","texts")
+                             .text(function(d){return d.properties.name})
+                             .attr("transform", function(d) {
+                           var centroid = path.centroid(d),
+                              x = centroid[0],
+                              y = centroid[1];
+                            // if((d.properties.name=="河北")||(d.properties.name=="澳门")||(d.properties.name=="安徽"))
+                            //      y=y+25;
+                           return "translate(" + x + ", " + y + ")";
+                        })
+                        .attr('fill','white')
+                        .attr("font-size","8px");
+                        
+
+                 function c2(a){
+                    d3.selectAll("#maingroup1")
+                      .remove()
+
+            const g2 =d3.selectAll("#container2") 
+            .append('g')
+            .attr('id', 'maingroup1')
+            .append('g')
+            .attr('class','mains')
+            .attr("width",innerWidth)
+            .attr("height",innerHeight)
+            // .attr('transform', `translate(${10}, ${-105})`);
+
+            .attr('transform', `translate(${margin.left}, ${margin.top})`)
+            
+                    data=selectedData
+            console.log("data0==",data)
+                        console.log("temp2",a)
+                        xlim = parseInt(a)
+                        console.log("selectedData1==",selectedData[0].location)
+                      
+                      
+                      
+                      
+                      
+          var x = d3.scaleTime()
+            .domain(d3.extent(data, function(d) { return d.date; })) //比例尺值域
+            .range([0, innerWidth]); //输入的值
+        g2.append("g")
+        
+            .attr("transform", "translate(0," + innerHeight + ")")
+            .call(d3.axisBottom(x))
+            // .selectAll("text")
+            // .attr("transform", "translate(-10,0)rotate(-45)")
+            // .style("text-anchor", "end");
+
+        // Y axis
+        var y = d3.scaleLinear()
+            .domain([0,8000])
+            .range([innerHeight,0])
+        g2.append("g")
+            .call(d3.axisLeft(y))
+
+        g2.append("path")
+        .datum(data)
+        .attr("fill", "none")
+        .attr("stroke", "black")
+        .attr("stroke-width", 1.5)
+        .attr("d", d3.line()
+            .curve(d3.curveBasis) // Just add that to have a curve instead of segments
+            .x(function(d) { return x(d.date) })
+            .y(function(d) { return y(d.value) })
+            )
+
+        
+            var Tooltip = d3
+                            .select("#container3")
+                            // .remove("#tooplip")
+                            .append("div")
+                            .style("opacity", 0)
+                            .attr("class", "tooltip")
+                            .attr("width","20px")
+                            .style("background-color", "white")
+                            .style("border", "solid")
+                            .style("border-width", "2px")
+                            .style("border-radius", "5px")
+                            .style("padding", "5px")
+
+                            // Three function that change the tooltip when user hover / move / leave a cell
+                            var mouseover = function(d) {
+                                Tooltip.style("opacity", 1)
+                            }
+                            var mousemove = function(d) {
+                                Tooltip.html(d.name +"Top Price: "+d.value+"-----------"+d.totalLocation)
+                                .style("left", (d3.mouse(this)[0]+70) + "px")
+                                .style("top", (d3.mouse(this)[1]) + "px")
+                            }
+                            var mouseleave = function(d) {
+                                Tooltip.style("opacity", 0)
+                            }
+                            
+                           
+
+                            // Add the points
+                            g2.append("g")
+                            .attr("class","gCircle")
+                            .selectAll("dot")
+                            .data(data)
+                            .enter()
+                            .append("circle")
+                                .attr("class", "myCircle")
+                                .attr("cx", function(d) { return x(d.date) } )
+                                .attr("cy", function(d) { return y(d.value) } )
+                                .attr("r", 8)
+                                .attr("stroke", "#69b3a2")
+                                .attr("stroke-width", 3)
+                                .attr("fill", "white")
+                                .on("mouseover", mouseover)
+                                .on("mousemove", mousemove)
+                                .on("mouseleave", mouseleave)
+                                                            console.log("xlim",typeof(a))
+                        console.log("data1==",data)
+
+                                                            g2.selectAll(".gCircle")
+                                                                .remove()
+                                                                
+                                                            g2.append("g")
+                                                              .attr("class","gCircle")
+                                                                .selectAll("dot")
+                                                                .data(selectedData)
+                                                                .enter()
+                                                                .append("circle")
+                                                                    .attr("class", "myCircle")
+                                                                    .attr("cx", function(d) { return x(d.date) } )
+                                                                    .attr("cy", function(d) { return y(d.value) } )
+                                                                    //.attr("r", xlim)
+                                                                    .attr("r", function(d) { 
+                                                                        console.log("d.totalLocation",typeof(d.totalLocation))
+                                                                        d.value=parseInt(d.value);
+                                                                        console.log(d.location)
+                                                                        pp=a
+                                                                        console.log("pp0",pp)
+                                                                        console.log(a)
+                                                                        if((d.location)==a) 
+                                                                        {
+                                                                            
+                                                                            return 9;
+                                                                        }
+                                                                        else {
+                                                                            console.log("d.value",typeof(d.value));
+                                                                            return 0;
+                                                                        } 
+                                                                    })
+                                                                
+                                                                    .attr("stroke", "#69b3a2")
+                                                                    .attr("stroke-width", 3)
+                                                                    .attr("fill", "white")
+                                                                    .on("mouseover", mouseover)
+                                                                    .on("mousemove", mousemove)
+                                                                    .on("mouseleave", mouseleave)
+
+
+                    
+                }
+                
+        });
+    console.log("temp3",temp) 
+
+
+        var width1=800
+        var height1=1200
+        var margin = {top: height1*0.05, right:  width1*0.15, bottom:  height1*0.85, left: width1*0.15};
+         
+        console.log(margin.left)
+        console.log(margin.right)
+        
+
+
+        const innerWidth = width1 - margin.left - margin.right;
+        const innerHeight = height1 - margin.top - margin.bottom;
+        console.log("000",margin.right)
+        
+        const g2 =d3
+            .selectAll("#container2") 
+            .append('g')
+            .attr('id', 'maingroup1')
+            .append('g')
+            .attr('class','mains')
+            .attr("width",innerWidth)
+            .attr("height",innerHeight)
+            // .attr('transform', `translate(${10}, ${-105})`);
+
+            .attr('transform', `translate(${margin.left}, ${margin.top})`);
+        
+            console.log("innerWidth22",innerWidth)
+            console.log("innerHeight22",innerHeight)
+      
+            // console.log("data==",data)
+            d3.csv("container4.csv",function(d) {
+            return {
+                 date : d3.timeParse("%Y-%m-%d")(d.date),
+                 value : d.value,
+                 name  : d.name, 
+                 totalLocation : d.totalLocation,
+                 location: d.location,
+                }
+                
+         }),          
+         d3.csv("container4.csv",function(d) {
+            return {
+                 date : d3.timeParse("%Y-%m-%d")(d.date),
+                 value : d.value,
+                 name  : d.name, 
+                 totalLocation : d.totalLocation,
+                 location: d.location,
+                }
+              
+         },
+// 
+        function(data){
+            console.log("data==",data)
+            selectedData=data
+            console.log("selectedData==",selectedData)
+        var x = d3.scaleTime()
+            .domain(d3.extent(data, function(d) { return d.date; })) //比例尺值域
+            .range([0, innerWidth]); //输入的值
+        g2.append("g")
+            .attr("transform", "translate(0," + innerHeight + ")")
+            .call(d3.axisBottom(x))
+            // .selectAll("text")
+            // .attr("transform", "translate(-10,0)rotate(-45)")
+            // .style("text-anchor", "end");
+
+        // Y axis
+        var y = d3.scaleLinear()
+            .domain([0,8000])
+            .range([innerHeight,0])
+        g2.append("g")
+            .call(d3.axisLeft(y))
+
+        g2.append("path")
+        .datum(data)
+        .attr("fill", "none")
+        .attr("stroke", "black")
+        .attr("stroke-width", 1.5)
+        .attr("d", d3.line()
+            .curve(d3.curveBasis) // Just add that to have a curve instead of segments
+            .x(function(d) { return x(d.date) })
+            .y(function(d) { return y(d.value) })
+            )
+
+        
+            var Tooltip = d3.select("#container3")
+                            .append("div")
+                            .style("opacity", 0)
+                            .attr("class", "tooltip")
+                            .attr("width","20px")
+                            .style("background-color", "white")
+                            .style("border", "solid")
+                            .style("border-width", "2px")
+                            .style("border-radius", "5px")
+                            .style("padding", "5px")
+
+                            // Three function that change the tooltip when user hover / move / leave a cell
+                            var mouseover = function(d) {
+                                Tooltip.style("opacity", 1)
+                            }
+                            var mousemove = function(d) {
+                                Tooltip.html(d.name +"Top Price: "+d.value+"-----------"+d.totalLocation)
+                                .style("left", (d3.mouse(this)[0]+70) + "px")
+                                .style("top", (d3.mouse(this)[1]) + "px")
+                            }
+                            var mouseleave = function(d) {
+                                Tooltip.style("opacity", 0)
+                            }
+
+                            // Add the points
+                            g2.append("g")
+                            .attr("class","gCircle")
+                            .selectAll("dot")
+                            .data(data)
+                            .enter()
+                            .append("circle")
+                                .attr("class", "myCircle")
+                                .attr("cx", function(d) { return x(d.date) } )
+                                .attr("cy", function(d) { return y(d.value) } )
+                                .attr("r", 8)
+                                .attr("stroke", "#69b3a2")
+                                .attr("stroke-width", 3)
+                                .attr("fill", "white")
+                                .on("mouseover", mouseover)
+                                .on("mousemove", mousemove)
+                                .on("mouseleave", mouseleave)
+                                                
+                                                function changeSize() {
+                                    
+                                                            xlim = parseInt(this.value)
+                                                            console.log("xlim",typeof(xlim))
+                                                            g2.selectAll(".gCircle")
+                                                                .remove()
+                                                                
+                                                            g2.append("g")
+                                                              .attr("class","gCircle")
+                                                                .selectAll("dot")
+                                                                .data(data)
+                                                                .enter()
+                                                                .append("circle")
+                                                                    .attr("class", "myCircle")
+                                                                    .attr("cx", function(d) { return x(d.date) } )
+                                                                    .attr("cy", function(d) { return y(d.value) } )
+                                                                    //.attr("r", xlim)
+                                                                    .attr("r", function(d) { 
+                                                                        d.value=parseInt(d.value);
+                                                                        console.log("pp1",pp)
+
+                                                                        if((d.value>xlim) && (d.location==pp)) 
+                                                                        {
+                                                                            
+                                                                            return 9;
+                                                                        }
+                                                                        else {
+                                                                            console.log("d.value",typeof(d.value));
+                                                                            return 0;
+                                                                        } 
+                                                                    })
+                                                                
+                                                                    .attr("stroke", "#69b3a2")
+                                                                    .attr("stroke-width", 3)
+                                                                    .attr("fill", "white")
+                                                                    .on("mouseover", mouseover)
+                                                                    .on("mousemove", mousemove)
+                                                                    .on("mouseleave", mouseleave)
+                                        }
+                                        d3.select("#buttonSize1").on("input", changeSize)
+                            })
+
+
+   
+
+    </script> 
+
+        <script>
+            function c1(a){
+                d3.select(a)
+                  .attr("fill","white");
+            }
+        </script>
+    </body>
+
+

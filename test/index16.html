@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>第一个 ECharts 实例</title>
+    <!-- 引入 echarts.js -->
+    <script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
+</head>
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <div id="main1" style="width: 800px;height:600px;"></div>
+    <br><br>
+    <div id="main21" style="width: 900px;height:500px;"></div>
+    <div id="main22" style="width: 800px;height:600px;"></div>
+    <script type="text/javascript">
+       
+ 
+        // 指定图表的配置项和数据
+        var chartDom = document.getElementById('main1');
+        var myChart = echarts.init(chartDom);
+        option1 = {
+                    backgroundColor: '#2c343c',
+                    title: {
+                        text: '总图',
+                        left: 'center',
+                        top: 20,
+                        textStyle: {
+                        color: '#ccc'
+                        }
+                    },
+                    tooltip: {
+                        trigger: 'item'
+                    },
+                    visualMap: {
+                        show: false,
+                        min: 80,
+                        max: 600,
+                        inRange: {
+                        colorLightness: [0, 1]
+                        }
+                    },
+                    series: [
+                        {
+                        name: 'In 杭州 近期活动',
+                        type: 'pie',
+                        radius: '55%',
+                        center: ['50%', '50%'],
+                        data: [
+                            { value: 17, name: '音乐类' },
+                            { value: 20, name: '戏剧类' },
+                            { value: 20, name: '展览类' },
+                            { value: 17, name: '运动类' },
+                            // { value: 400, name: 'Search Engine' }
+                        ].sort(function (a, b) {
+                            return a.value - b.value;
+                        }),
+                        roseType: 'radius',
+                        label: {
+                            color: 'rgba(255, 255, 255, 0.3)'
+                        },
+                        labelLine: {
+                            lineStyle: {
+                            color: 'white'
+                            },
+                            smooth: 0.2,
+                            length: 10,
+                            length2: 20
+                        },
+                        itemStyle: {
+                            color: 'white',
+                            shadowBlur: 200,
+                            shadowColor: 'white'
+                        },
+                        animationType: 'scale',
+                        animationEasing: 'elasticOut',
+                        animationDelay: function (idx) {
+                            return Math.random() * 200;
+                        }
+                        }
+                    ]
+                    };
+        myChart.setOption(option1);
+            
+            
+                    // 基于准备好的dom，初始化echarts实例
+        // import * as echarts from 'echarts';
+
+        var chartDom= document.getElementById('main21');
+        var myChart = echarts.init(chartDom);
+        option21 = {
+  title: {
+    text: 'Stacked Line'
+  },
+  tooltip: {
+    trigger: 'axis'
+  },
+  legend: {
+    data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+  },
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  toolbox: {
+    feature: {
+      saveAsImage: {}
+    }
+  },
+  xAxis: {
+    type: 'category',
+    boundaryGap: false,
+    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+  },
+  yAxis: {
+    type: 'value'
+  },
+  series: [
+    {
+      name: 'Email',
+      type: 'line',
+      stack: 'Total',
+      data: [120, 132, 101, 134, 90, 230, 210]
+    },
+    {
+      name: 'Union Ads',
+      type: 'line',
+      stack: 'Total',
+      data: [220, 182, 191, 234, 290, 330, 310]
+    },
+    {
+      name: 'Video Ads',
+      type: 'line',
+      stack: 'Total',
+      data: [150, 232, 201, 154, 190, 330, 410]
+    },
+    {
+      name: 'Direct',
+      type: 'line',
+      stack: 'Total',
+      data: [320, 332, 301, 334, 390, 330, 320]
+    },
+    {
+      name: 'Search Engine',
+      type: 'line',
+      stack: 'Total',
+      data: [820, 932, 901, 934, 1290, 1330, 1320]
+    }
+  ]
+};  
+
+  
+        option21 && myChart.setOption(option21);
+
+
+
+
+        var chartDom= document.getElementById('main22');
+                var myChart = echarts.init(chartDom);
+            
+                
+
+
+
+        option22 && myChart.setOption(option22);
+ 
+       
+    </script>
+</body>
+</html>

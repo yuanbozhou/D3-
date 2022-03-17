@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+    <meta charset="utf-8" />
+    <title>同城</title>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <link rel="stylesheet" href="css/materialize.min.css">
+
+   
+
+    <style>
+        body {
+            background: linear-gradient(90deg, #ffffff, #d2e0f8)
+        }
+
+        .container {
+            width: 100%;
+            height: 35rem;
+
+            float: right;
+            display: flex;
+        }
+
+        .btn_container {
+            width: 100%;
+            height: 10rem;
+            text-align: center;
+        }
+
+        .btn_container:after {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        #toast-container {
+            top: 80%;
+            right: 45%;
+        }
+
+        .bubbles{
+            stroke-width:2px;
+            stroke:white;
+        }
+        .bubbles:hover{
+            stroke:green;
+        }
+    </style>
+</head>
+<script>   
+    function show()
+                {
+                    console.log("5的位置");
+                    
+                    return "./wordCloud.jpg"
+                   
+                }
+</script>
+
+
+    <nav style="background:#007497e0">
+        <div class="nav-wrapper">
+            <a href="main.html" class="brand-logo" style="margin-left: 1rem;font-size: 1.2rem; ">同城数据可视化</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="https://www.douban.com/location/hangzhou/events/future-music">豆瓣同城页面</a></li>
+               
+            </ul>
+        </div>
+    </nav>
+    <!-- <div id="container" class="container"></div> -->
+
+    <div class="row" style="
+    margin-top: 10px;
+    display: flex;">
+
+        <ul class="collapsible" data-collapsible="accordion" style="
+        margin-left: 4rem;width: 26rem">
+            <li class="active">
+                <div class="collapsible-header">样本数据</div>
+                <div class="collapsible-body" style="display: block;">
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea id="ta" class="materialize-textarea"
+                                        style="border-bottom: 0px;width: 24rem; height:18em"></textarea>
+                                    <label for="textarea1" id="t1">
+                                        <!-- name,avgPrice_music<br> -->
+                                       「回暖」2021春夏巡演,298.5<br>
+                                        张杰「曜·北斗」演唱会,762.5<br>
+                                        张韶涵“寓言”世界巡回演唱会,512.5<br>
+                                        久石让钢琴曲梦幻之旅演奏会,332.5<br>
+                                        久石让·宫崎骏音乐会,244.5<br>
+                                        “直到世界尽头”经典动漫演唱会,284.5<br>
+                                        2021汪峰演唱会,512.5<br>
+                                        德国原版绘本启蒙交响音乐会,1491.0<br>
+                                        痛仰乐队「世界会变好」,799.0<br>
+                                        马克西姆古典跨界钢琴演奏会,736.5<br>
+                                        《感谢你爱我》 2021巡游记,293.5<br>
+                                        杭盖2021乘风而归全国巡演,667.5<br>
+                                        2021圣诞超级枕头大战,128<br>
+                                        暖冬摇滚「潜入黑镜」黑屋,150<br>
+                                        【杭州站】「Fine乐团」,816.0<br>
+                                        李大奔「野望」2021全国巡演 杭州站,459.0<br>
+                                        「脑浊乐队」2021全国巡演 杭州站,362.0
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </li>
+
+          
+           </li>
+            <li class="btn_container"  onclick="show()">
+                <a class="waves-effect waves-light btn-large">生成wordCloud</a>
+                <!-- <img src="x" onerror="javscript:this.scr=javascript:show()" width="350px" alt="图片未加载" /> -->
+            </li>
+            <img src="wordcloud.jpg" width="380px" height="240px" alt="图片未加载" />
+            <!-- <script>
+            function c1(){
+                <img src="wordcloud.jpg" width="350px" alt="图片未加载" />
+            }
+           </script> -->
+        </ul>
+ 
+
+
+
+
+        <div class="col s12 m7" style="
+            float: right;
+            margin-right: 4rem;
+        ">
+
+            <div class="card">
+                <script>
+                var width=1000
+                var height=500
+
+                console.log(width,height);
+              </script>
+                   
+                    <svg height="800" width="1200" id="container1"></svg>                    
+                
+
+                <div class="card-content" style="background: aliceblue;">
+                    <p>基于d3.js构建</p>
+               </div>
+
+               <div class="card1" height="20" width="20">
+                <svg height="20" width="20" id="containerRight" class="svgs">12345</svg> 
+                
+            </div>
+            </div>
+        </div> 
+    </div>
+    <body>
+        <script>
+
+            var width1=600
+            var height1=300
+            var margin=40          
+            var radius = Math.min(width1, height1) / 2 - margin
+            const g1 =d3.selectAll("#container1") 
+                .append("svg")
+                .attr('id', 'maingroup1')
+                .attr("width",width1)
+                .attr("height",height1)
+                .append("g")
+                .attr('transform', `translate(${width1/2}, ${height1/2})`);
+
+            var data=[9,20,30,8,12]
+             var color=d3.scaleOrdinal()
+                         .domain(data)
+                         .range(d3.schemeSet2);
+
+            var pie = d3.pie()
+                        .value(function(d) {return d.value; })
+            var data_ready = pie(d3.entries(data))
+            console.log(data_ready)          
+            var arcGenerator = d3.arc()
+                        .innerRadius(0)
+                        .outerRadius(radius)
+
+                     g1.selectAll('mySlices')
+                        .data(data_ready)
+                        .enter()
+                        .append('path')
+                            .attr('d', arcGenerator)
+                            .attr('fill', function(d){ return(color(d.data.key)) })
+                            .attr("stroke", "black")
+                            .style("stroke-width", "2px")
+                            .style("opacity", 0.7)                    
+        </script> 
+    </body>
+
+

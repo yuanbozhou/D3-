@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+    <meta charset="utf-8" />
+    <title>同城</title>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <!-- <script src="https://d3js.org/d3.v4.min.js"></script> -->
+    <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <link rel="stylesheet" href="css/materialize.min.css">
+
+   
+
+    <style>
+        body {
+            background: linear-gradient(90deg, #ffffff, #d2e0f8)
+        }
+
+        .container {
+            width: 100%;
+            height: 35rem;
+
+            float: right;
+            display: flex;
+        }
+
+        .btn_container {
+            width: 100%;
+            height: 10rem;
+            text-align: center;
+        }
+
+        .btn_container:after {
+            content: '';
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        #toast-container {
+            top: 80%;
+            right: 45%;
+        }
+
+        .bubbles{
+            stroke-width:2px;
+            stroke:white;
+        }
+        .bubbles:hover{
+            stroke:green;
+        }
+    </style>
+</head>
+<script>   
+    function show()
+                {
+                    console.log("5的位置");
+                    
+                    return "./wordCloud.jpg"
+                   
+                }
+</script>
+
+
+    <nav style="background:#007497e0">
+        <div class="nav-wrapper">
+            <a href="main.html" class="brand-logo" style="margin-left: 1rem;font-size: 1.2rem; ">同城数据可视化</a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="https://www.douban.com/location/hangzhou/events/future-music">豆瓣同城页面</a></li>
+               
+            </ul>
+        </div>
+    </nav>
+  
+
+    <div class="row" style="
+    margin-top: 10px;
+    display: flex;">
+
+        <ul class="collapsible" data-collapsible="accordion" style="
+        margin-left: 4rem;width: 26rem">
+            <li class="active">
+                <div class="collapsible-header">样本数据</div>
+                <div class="collapsible-body" style="display: block;">
+                    <div class="row">
+                        <form class="col s12">
+                            <div class="row">
+                                <div class="input-field col s12">
+                                    <textarea id="ta" class="materialize-textarea"
+                                        style="border-bottom: 0px;width: 24rem; height:18em"></textarea>
+                                    <label for="textarea1" id="t1">
+                                        <!-- name,avgPrice_music<br> -->
+                                       「回暖」2021春夏巡演,298.5<br>
+                                        张杰「曜·北斗」演唱会,762.5<br>
+                                        张韶涵“寓言”世界巡回演唱会,512.5<br>
+                                        久石让钢琴曲梦幻之旅演奏会,332.5<br>
+                                        久石让·宫崎骏音乐会,244.5<br>
+                                        “直到世界尽头”经典动漫演唱会,284.5<br>
+                                        2021汪峰演唱会,512.5<br>
+                                        德国原版绘本启蒙交响音乐会,1491.0<br>
+                                        痛仰乐队「世界会变好」,799.0<br>
+                                        马克西姆古典跨界钢琴演奏会,736.5<br>
+                                        《感谢你爱我》 2021巡游记,293.5<br>
+                                        杭盖2021乘风而归全国巡演,667.5<br>
+                                        2021圣诞超级枕头大战,128<br>
+                                        暖冬摇滚「潜入黑镜」黑屋,150<br>
+                                        【杭州站】「Fine乐团」,816.0<br>
+                                        李大奔「野望」2021全国巡演 杭州站,459.0<br>
+                                        「脑浊乐队」2021全国巡演 杭州站,362.0
+                                    </label>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </li>
+
+          
+           </li>
+            <li class="btn_container"  onclick="show()">
+                <a class="waves-effect waves-light btn-large">生成wordCloud</a>
+                <!-- <img src="x" onerror="javscript:this.scr=javascript:show()" width="350px" alt="图片未加载" /> -->
+            </li>
+            <img src="wordcloud.jpg" width="380px" height="240px" alt="图片未加载" />
+            <!-- <script>
+            function c1(){
+                <img src="wordcloud.jpg" width="350px" alt="图片未加载" />
+            }
+           </script> -->
+        </ul>
+
+
+
+        <div class="col s12 m7" style="
+            float: right;
+            margin-right: 4rem;
+        ">
+   
+   
+            <div class="card">
+                <script>
+                var width=document.documentElement.clientWidth
+                var height=document.documentElement.clientHeight
+
+                console.log(width,height);
+        
+                d3.select("#container")
+                .attr("width",width)
+                .attr("height",height)
+
+                var width1=width
+                var height1=height
+          
+
+                d3.select("#container3")
+                .attr("width",width1)
+                .attr("height",height1)
+
+                </script>
+                  <div id="container4" class="container4"  style="fill:black">
+                    <rect x="0" y="0" width="1000" height="1000" rx="0" ry="10"
+                    style="fill:black"/>
+                  </div> 
+                <div id="container" class="card-image container">
+                   
+                     
+               
+               
+
+                    <svg height="800" width="1200" id="container3" class="svgs">
+                        
+                    </svg> 
+                    <script>
+            
+                        const svg3 = d3.selectAll("#container3");
+                        
+                        d3.csv("music2.csv", function(data) {
+
+                        console.log(1111,data)   
+                        console.log(width1)  
+                        
+                       
+                        var margin = {top: height1*0.05, right:  width1*0.5, bottom:  height1*0.5, left: width1*0.05};
+                        
+                        // var margin = {top: height1*0.05, right:  width1*0.05, bottom:  height1*0.05, left: width1*0.25};
+                        // var margin = {top: 20, right: 30, bottom: 40, left: 90},
+                        console.log(margin.left)
+                        console.log(margin.right)
+                        
+
+                        const innerWidth = width1 - margin.left - margin.right;
+                        const innerHeight = height1 - margin.top - margin.bottom;
+                        const g = svg3.append('g').
+                                   attr('id', 'maingroup')
+                            .attr("width",innerWidth)
+                            .attr("height",innerHeight)
+                            .attr('transform', `translate(${margin.left}, ${margin.top})`);
+                        console.log(2222,innerWidth)
+
+                        // X axis
+                        var x = d3.scaleLinear()
+                            .domain([0, 2000]) //比例尺值域
+                            .range([0, innerWidth]); //输入的值
+                        g.append("g")
+                            .attr("transform", "translate(0," + innerHeight + ")")
+                            .call(d3.axisBottom(x))
+                            // .selectAll("text")
+                            // .attr("transform", "translate(-10,0)rotate(-45)")
+                            // .style("text-anchor", "end");
+
+                        // Y axis
+                        var y = d3.scaleLinear()
+                            .domain([0,20])
+                            .range([innerHeight,0])
+                        g.append("g")
+                            .call(d3.axisLeft(y))
+
+                        
+                        var z=d3.scaleLinear()
+                            .domain([0, 2000])
+                            .range([8,20])
+                        
+                        //Add a scale for bubble color
+                        var myColor=d3.scaleOrdinal()
+                            .domain(["Asia", "Europe", "Americas", "Africa", "Oceania"])
+                            .range(d3.schemeSet2);
+                        
+
+                        //鼠标移到图案时提示框的style
+                        var tooltip=d3.selectAll("#container4")
+                            .append("div")
+                            .style("opacity",0)
+                            .attr("class","tooltip")
+                            .style("background-color","white")
+                            .style("border-radius","5px")
+                            .style("padding","10px")
+                            .style("color","black")
+
+                        //mouseover
+                        var showTooltip=function(d){
+                            tooltip.transition()  //过渡动画transition
+                                   .duration(1000)  //动画持续时间1s
+
+                            tooltip.style("opacity",1)
+                                   .html("Show——"+d.country)//提示框的位置，当前点的横坐标+30，纵坐标+30
+                                   .style("left", (d3.mouse(this)[0]+30) + "px")
+                                   .style("top", (d3.mouse(this)[1]+30) + "px")
+                        }
+
+                        //mousemove 事件是当鼠标指针移动时触发的
+                        var moveTooltip=function(d){
+                            tooltip.style("left", (d3.mouse(this)[0]+30) + "px")
+                                  .style("top", (d3.mouse(this)[1]+30) + "px")
+                        }
+                        //
+                        var hideTooltip=function(d){
+                            tooltip.transition()
+                                   .duration(200)
+                                   .style("opacity",0)
+                        }
+
+
+                        g.selectAll("dot")
+                            .data(data)
+                            .enter()
+                            .append("circle")
+                            .attr("class","bubbles")
+                            // .transition()
+                            // .duration(4000)
+                            .attr("cx",function(d) { return x(d.pop); })
+                            .attr("cy", function(d) { return y(d.lifeExp); })
+                            .attr("r", function(d) { return z(d.pop); })
+                            .style("fill",function(d){
+                                return myColor(d.country);
+                            })
+                            .on("mouseover",showTooltip)
+                            .on("mousemove",moveTooltip)
+                            .on("mouseleave",hideTooltip)
+                           
+
+                        
+                        
+                        });
+
+
+                    </script>
+
+                    <span class="card-title" style="color: #868181;">Graph</span>
+                </div>
+
+
+                <div class="card-content" style="background: aliceblue;">
+                    <p>基于d3.js构建</p>
+               </div>
+               
+            </div>
+        </div>
+    </div>
+   
+
+
+</body>
